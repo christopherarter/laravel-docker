@@ -10,6 +10,7 @@ RUN docker-php-ext-install json
 RUN docker-php-ext-install pdo
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install tokenizer
+RUN apt-get install -y apt-utils zip unzip
 RUN rm -rf /var/lib/apt/lists/*
 
 
