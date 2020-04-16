@@ -1,25 +1,16 @@
-FROM php:7.3-apache
+FROM php:7.4.4-apache
 
-RUN apt-get update -yqq && \
-    apt-get install -y apt-utils zip unzip && \
-    apt-get install -y nano && \
-    apt-get install -y libzip-dev libpq-dev  && \
-    apt-get install -y libxml2-dev && \
-    apt-get install -y libmcrypt-dev && \
-    a2enmod rewrite && \
-    docker-php-ext-install pcntl && \
-    docker-php-ext-install pdo && \
-    docker-php-ext-install pdo_mysql && \
-    docker-php-ext-install mysqli && \
-    docker-php-ext-configure zip --with-libzip && \
-    docker-php-ext-install zip && \
-    docker-php-ext-install hash && \
-    docker-php-ext-install mbstring && \
-    docker-php-ext-install bcmath && \
-    docker-php-ext-install json && \
-    docker-php-ext-install tokenizer && \
-    #apt-get install supervisor -y && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update -yqq
+RUN apt-get install supervisor -y
+RUN apt-get -y install openssl
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install ctype
+RUN docker-php-ext-install fileinfo
+RUN docker-php-ext-install json
+RUN docker-php-ext-install pdo
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install tokenizer
+RUN rm -rf /var/lib/apt/lists/*
 
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/app/public
