@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker login -u christopherarter -p ${{ secrets.DOCKER_PASSWORD }} registry.hub.docker.com/christopherarter/laravel
-      - run: docker build -t registry.hub.docker.com/christopherarter/laravel:latest . --file Dockerfile
-      - run: docker push registry.hub.docker.com/christopherarter/laravel
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: christopherarter/laravel
+          username: christopherarter
+          password: ${{ secrets.DOCKER_PASSWORD }}
