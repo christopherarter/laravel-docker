@@ -1,4 +1,4 @@
-name: CI
+name: publish-master
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} ${{ secrets.DOCKER_REPO }}
-      - run: docker build -t ${{ secrets.DOCKER_REPO }} . --file Dockerfile
+      - run: docker build -t ${{ secrets.DOCKER_REPO }} .
       - run: docker push ${{ secrets.DOCKER_REPO }}
